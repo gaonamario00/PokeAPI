@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>POKEAPI</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body style = "background-color: blue;">
+    <img style="display: block; margin: 0 auto" width="750" height="400" src="https://logos-marcas.com/wp-content/uploads/2020/05/Pokemon-Logo.png"> 
+
+    <div class = "container">
+
+        <div style = "text-align: center;">
+            <h3 style = "color: white;"> BIENVENIDO A LA POKEAPI</h3>
+            <input  style = "text-align: center;" type = "number" id = "pokeID" >
+            <br>
+            <br>
+            <button  name = "btn" class = "btn btn-warning" style = "color: white;" onclick = "buscar()" >BUSCAR</button>
+        </div>
+        <br>
+        <div id = "results" style = "text-align: center;">
+
+        </div>
+
+    </div>
+
+</body>
+<script>
+
+    var ID = "";
+    var UrlApi = "";
+    var data = undefined;
+    var nombre = undefined;
+    var img = undefined;
+    var types = undefined;
+
+    function buscar(){
+        ID = document.getElementById("pokeID");
+        UrlApi = "https://pokeapi.co/api/v2/pokemon/" + ID.value;
+        // alert(UrlApi);        
+        // console.log(UrlApi);
+        obtenerPokemon();
+    }
+    
+    function obtenerPokemon(){
+
+        if(data != undefined){
+            document.getElementById('results').removeChild(nombre);
+            document.getElementById('results').removeChild(img);
+            document.getElementById('results').removeChild(types);
+            data = undefined;
+        }
+
+
+
+        var request = new XMLHttpRequest();
+        request.open('GET',UrlApi,true);
+        request.send();
+
+        request.onreadystatechange = function(){
+
+            if(this.readyState == 4 && this.status == 200){
+                var resultsData = this.response;
+                data = JSON.parse(resultsData);
+                mostrarPokemon(data);
+            }
+        }
+
+    }
+
+    function mostrarPokemon(data){
+        
+        var element =  document.getElementById("results");
+        // var countingHtml = document.createElement('h4');
+        // countingHtml.style.color = "yellow";
+        nombre = document.createElement('h3');
+        nombre.style.color = "yellow";
+        var htmlStyle = "<hr/ ><strong>" +  data.name + "</strong><br />";
+        nombre.innerHTML = htmlStyle; 
+        element.appendChild(nombre);
+
+        img = document.createElement('img');
+        img.src = data.sprites.front_default;
+        img.width = "300";
+        img.height = "300";
+        element.appendChild(img);
+
+        htmlStyle = "<hr/ ><strong>";
+
+        for(var i = 0; i<data.types.length;i++){
+            if(i==1) htmlStyle+= "/";
+            types = document.createElement('h4');
+            types.style.color = "white";
+            htmlStyle += data.types[i].type.name;
+
+        }
+        htmlStyle += "</strong><br />";
+        types.innerHTML = htmlStyle;
+        element.appendChild(types);
+
+        // document.getElementById('results').removeChild(nombre);
+        // document.getElementById(data.id).style.display = "inline";
+        // debugger;
+
+        /*var currentItem = data;
+        var nombre = document.createElement('h5');
+        var img = document.createElement('img');
+        var htmlStyle = "<hr/ ><strong>" +  currentItem.name + "</strong><br />";
+        img.src = data.sprites.front_default;
+        img.width = "300";
+        img.height = "300";
+        nombre.innerHTML = htmlStyle; 
+        document.getElementById('results').appendChild(nombre);
+        document.getElementById('results').appendChild(img);
+        debugger;
+        nombre.style.color = "yellow";             
+        htmlStyle+= " type: " + currentItem.types[0].type.name;*/
+
+
+        // for(var i = 0; i<data.types.length;i++){
+        //     console.log(data.types[i].type.name);
+        // }
+        
+    }
+
+    function eliminarElemento(id){
+	imagen = document.getElementById(id);	
+	if (!imagen){
+		alert("El elemento selecionado no existe");
+	} else {
+        debugger;
+		var padre = imagen.parentNode;
+		padre.removeChild(imagen);
+	}
+}
+
+</script>
+
+<!-- <footer style="color: white;">Hecho por Mario Alberto Gaona Gallegos</footer> -->
+</html>
