@@ -12,17 +12,21 @@
         <div style = "text-align: center;">
             <h3 style = "color: white;"> BIENVENIDO A LA POKEAPI</h3>
             <input  style = "text-align: center;" type = "number" id = "pokeID" >
+            <button class="btn btn-info" onclick="alertaInfo()">Info</button>
             <br>
             <br>
             <button  name = "btn" class = "btn btn-warning" style = "color: white;" onclick = "buscar()" >BUSCAR</button>
+            
         </div>
         <br>
         <div id = "results" style = "text-align: center;">
-
+            <!-- <div id="spin" class="spinner-border text-success" role="status">
+                <span class="sr-only">Loading...</span>
+              </div> -->
         </div>
 
     </div>
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </body>
 <script>
 
@@ -32,13 +36,22 @@
     var nombre = undefined;
     var img = undefined;
     var types = undefined;
-
+    var spin = undefined;
     function buscar(){
         ID = document.getElementById("pokeID");
-        UrlApi = "https://pokeapi.co/api/v2/pokemon/" + ID.value;
-        // alert(UrlApi);        
-        // console.log(UrlApi);
-        obtenerPokemon();
+        if(ID.value==""||ID.value==undefined||ID.value==null){
+            alertaAdvertencia();
+        }else{
+            if(ID.value<=0 || ID.value>898){
+            console.log(ID.value);
+            alertaError();
+            }else{
+            UrlApi = "https://pokeapi.co/api/v2/pokemon/" + ID.value;
+            // alert(UrlApi);        
+            // console.log(UrlApi);
+            obtenerPokemon();
+            }
+        }
     }
     
     function obtenerPokemon(){
@@ -131,6 +144,27 @@
 		var padre = imagen.parentNode;
 		padre.removeChild(imagen);
 	}
+}
+function alertaError(){
+    Swal.fire({
+                title: "Valor fuera de rango",
+                text: "Por favor ingrese un numero de 1-898",
+                icon: "error"
+           })
+}
+function alertaAdvertencia(){
+    Swal.fire({
+                title: "Debe ingresar algun valor",
+                text: "Por favor ingrese un numero de 1-898",
+                icon: "warning"
+           })
+}
+function alertaInfo(){
+    Swal.fire({
+                title: "Información",
+                text: "Actualmente existen 898 Pokemón con la última entrega que fue Pokémon Sword y Pokémon Shield",
+                icon: "info"
+           })
 }
 
 </script>
