@@ -56,13 +56,7 @@
     
     function obtenerPokemon(){
 
-        if(data != undefined){
-            document.getElementById('results').removeChild(nombre);
-            document.getElementById('results').removeChild(img);
-            document.getElementById('results').removeChild(types);
-            data = undefined;
-        }
-
+        clear();
 
 
         var request = new XMLHttpRequest();
@@ -83,11 +77,9 @@
     function mostrarPokemon(data){
         
         var element =  document.getElementById("results");
-        // var countingHtml = document.createElement('h4');
-        // countingHtml.style.color = "yellow";
         nombre = document.createElement('h3');
         nombre.style.color = "yellow";
-        var htmlStyle = "<hr/ ><strong>" +  data.name + "</strong><br />";
+        var htmlStyle = "<hr/ ><strong>" +data.id+". "+  data.name + "</strong><br />";
         nombre.innerHTML = htmlStyle; 
         element.appendChild(nombre);
 
@@ -109,29 +101,7 @@
         htmlStyle += "</strong><br />";
         types.innerHTML = htmlStyle;
         element.appendChild(types);
-
-        // document.getElementById('results').removeChild(nombre);
-        // document.getElementById(data.id).style.display = "inline";
-        // debugger;
-
-        /*var currentItem = data;
-        var nombre = document.createElement('h5');
-        var img = document.createElement('img');
-        var htmlStyle = "<hr/ ><strong>" +  currentItem.name + "</strong><br />";
-        img.src = data.sprites.front_default;
-        img.width = "300";
-        img.height = "300";
-        nombre.innerHTML = htmlStyle; 
-        document.getElementById('results').appendChild(nombre);
-        document.getElementById('results').appendChild(img);
-        debugger;
-        nombre.style.color = "yellow";             
-        htmlStyle+= " type: " + currentItem.types[0].type.name;*/
-
-
-        // for(var i = 0; i<data.types.length;i++){
-        //     console.log(data.types[i].type.name);
-        // }
+  
         
     }
 
@@ -151,6 +121,7 @@ function alertaError(){
                 text: "Por favor ingrese un numero de 1-898",
                 icon: "error"
            })
+           clear();
 }
 function alertaAdvertencia(){
     Swal.fire({
@@ -158,16 +129,22 @@ function alertaAdvertencia(){
                 text: "Por favor ingrese un numero de 1-898",
                 icon: "warning"
            })
+           clear();
 }
 function alertaInfo(){
     Swal.fire({
                 title: "Información",
-                text: "Actualmente existen 898 Pokemón con la última entrega que fue Pokémon Sword y Pokémon Shield",
+                text: "Actualmente existen 898 Pokemón con la última entrega que fue Pokémon Sword y Pokémon Shield.",
                 icon: "info"
            })
+}
+function clear(){
+    var C = document.getElementById("pokeID");
+    C.value=null;
+    C = document.getElementById("results");
+    C.innerHTML = "";
 }
 
 </script>
 
-<!-- <footer style="color: white;">Hecho por Mario Alberto Gaona Gallegos</footer> -->
 </html>
