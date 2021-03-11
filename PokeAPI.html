@@ -49,6 +49,7 @@
     var spin = undefined;
     function buscar(){
         ID = document.getElementById("pokeID");
+
         if(ID.value==""||ID.value==undefined||ID.value==null){
             alertaAdvertencia();
         }else{
@@ -56,10 +57,19 @@
             console.log(ID.value);
             alertaError();
             }else{
-            UrlApi = "https://pokeapi.co/api/v2/pokemon/" + ID.value;
-            // alert(UrlApi);        
-            // console.log(UrlApi);
-            obtenerPokemon();
+                var g = ID.value;
+                console.log(ID.value);
+                console.log(parseInt(g));
+                var num = g - parseInt(g);
+                console.log(num);
+                if(num > 0){
+                    alertaNoDecimales();
+                }else{
+                    UrlApi = "https://pokeapi.co/api/v2/pokemon/" + ID.value;
+                    // alert(UrlApi);        
+                    // console.log(UrlApi);
+                    obtenerPokemon();
+                }
             }
         }
     }
@@ -147,6 +157,14 @@ function alertaInfo(){
                 text: "Actualmente existen 898 Pokémon con la última entrega que fue Pokémon Sword y Pokémon Shield.",
                 icon: "info"
            })
+}
+function alertaNoDecimales(){
+    Swal.fire({
+                title: "Error!",
+                text: "Debe ingresar un numero entero",
+                icon: "error"
+           })
+           clear();
 }
 function clear(){
     var C = document.getElementById("pokeID");
