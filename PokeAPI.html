@@ -5,14 +5,23 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body style = "background-color: blue;">
-    <img style="display: block; margin: 0 auto" width="750" height="400" src="https://logos-marcas.com/wp-content/uploads/2020/05/Pokemon-Logo.png"> 
 
-    <div class = "container">
-
+    <!-- <img style="display: block; margin: 0 auto" width="750" height="400" src="https://logos-marcas.com/wp-content/uploads/2020/05/Pokemon-Logo.png">  -->
+    
+    <!-- <div class="hijo">
+        <a href="http://www.facebook.com/AQUI_TU_PAGINA" target="_blank"><img alt="Siguenos en Facebook" src="https://lh6.googleusercontent.com/-CYt37hfDnQ8/T3nNydojf_I/AAAAAAAAAr0/P5OtlZxV4rk/s32/facebook32.png" width=32 height=32  /></a>
+    </div> -->
+    
+    
+    <div class="container" >
+        <div >
+            <img style="display: block; margin: 0 auto" width="750" height="400" src="https://logos-marcas.com/wp-content/uploads/2020/05/Pokemon-Logo.png">
+        </div>
         <div style = "text-align: center;">
-            <h3 style = "color: white;"> BIENVENIDO A LA POKEAPI</h3>
+            <strong><h3 style = "color: white;"> BIENVENIDO A LA POKEAPI</h3></strong>
             <input  style = "text-align: center;" type = "number" id = "pokeID" >
             <button class="btn btn-info" onclick="alertaInfo()">Info</button>
+            <a class="content" href="https://github.com/gaonamario00"><img alt="" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width=32 height=32  /></a>
             <br>
             <br>
             <button  name = "btn" class = "btn btn-warning" style = "color: white;" onclick = "buscar()" >BUSCAR</button>
@@ -20,6 +29,7 @@
         </div>
         <br>
         <div id = "results" style = "text-align: center;">
+            
             <!-- <div id="spin" class="spinner-border text-success" role="status">
                 <span class="sr-only">Loading...</span>
               </div> -->
@@ -134,7 +144,7 @@ function alertaAdvertencia(){
 function alertaInfo(){
     Swal.fire({
                 title: "Información",
-                text: "Actualmente existen 898 Pokemón con la última entrega que fue Pokémon Sword y Pokémon Shield.",
+                text: "Actualmente existen 898 Pokémon con la última entrega que fue Pokémon Sword y Pokémon Shield.",
                 icon: "info"
            })
 }
@@ -146,5 +156,33 @@ function clear(){
 }
 
 </script>
+
+
+<style>
+    /* .hijo{
+        display: flex;
+        justify-content: center;
+    }
+    .son{
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        }
+        */
+    .content{
+        position: absolute;
+        top: 28%;
+        left: 90%;
+        transform: translate(-50%, -50%);
+    }
+    /*
+    .content2{
+        position: absolute;
+        top: 95%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    } */
+</style>
 
 </html>
