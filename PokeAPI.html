@@ -4,8 +4,9 @@
     <title>POKEAPI ¬¬</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="icon" href="ICONO/pika.ico"/>
+    <link rel="stylesheet" href="main.css">
 </head>
-<body style = "background-color: #9984d4;">   
+<body style = "background-color: #9984d4;">
     <div class="container" >
         <div >
             <img style="display: block; margin: 0 auto" width="750" height="400" src="https://logos-marcas.com/wp-content/uploads/2020/05/Pokemon-Logo.png">
@@ -23,158 +24,7 @@
         <br>
         <div id = "results" style = "text-align: center;">  </div> <!--Aquí se muestran los resultados-->
     </div>
+    <script src="funciones.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </body>
- <!--JAVASCRIPT DEL SITIO-->
-<script>
-    var ID = "";
-    var UrlApi = "";
-    var data = undefined;
-    var nombre = undefined;
-    var img = undefined;
-    var types = undefined;
-    var spin = undefined;
-    function buscar(){
-        ID = document.getElementById("pokeID");
-
-        if(ID.value==""||ID.value==undefined||ID.value==null){
-            alertaAdvertencia();
-        }else{
-            if(ID.value<=0 || ID.value>898){
-            console.log(ID.value);
-            alertaError();
-            }else{
-                var g = ID.value;
-                console.log(ID.value);
-                console.log(parseInt(g));
-                var num = g - parseInt(g);
-                console.log(num);
-                if(num > 0){
-                    alertaNoDecimales();
-                }else{
-                    UrlApi = "https://pokeapi.co/api/v2/pokemon/" + ID.value;
-                    obtenerPokemon();
-                }
-            }
-        }
-    }
-    
-    function obtenerPokemon(){
-        clear();
-        var request = new XMLHttpRequest();
-        request.open('GET',UrlApi,true);
-        request.send();
-
-        request.onreadystatechange = function(){
-
-            if(this.readyState == 4 && this.status == 200){
-                var resultsData = this.response;
-                data = JSON.parse(resultsData);
-                mostrarPokemon(data);
-            }
-        }
-
-    }
-
-    function mostrarPokemon(data){
-        var element =  document.getElementById("results");
-        nombre = document.createElement('h3');
-        nombre.style.color = "white";
-
-        var htmlStyle = "<hr/ ><strong>" +data.id+". "+  data.name + "</strong><br />";
-            nombre.innerHTML = htmlStyle; 
-            element.appendChild(nombre);
-
-            img = document.createElement('img');
-            img.src = data.sprites.front_default;
-            img.width = "300";
-            img.height = "300";
-            element.appendChild(img);
-
-            //aquí es donde voy a poner el movimiento
-            region = document.createElement('h3');
-            region.style.color = "white";
-            var htmlStyle2 = "Movimiento: " + data.moves[0].move.name + "<br />";
-            region.innerHTML = htmlStyle2; 
-            element.appendChild(region);
-
-        htmlStyle = "<hr/ ><strong>";
-        htmlStyle+="Tipo: ";
-        for(var i = 0; i<data.types.length;i++){
-            if(i==1) htmlStyle+= "/";
-            types = document.createElement('h4');
-            types.style.color = "white";
-            htmlStyle += data.types[i].type.name;
-        }
-        htmlStyle += "</strong><br />";
-        types.innerHTML = htmlStyle;
-        element.appendChild(types);           
-    }
-
-    function eliminarElemento(id){
-        imagen = document.getElementById(id);	
-        if (!imagen){
-            alert("El elemento selecionado no existe");
-        } 
-        else {
-            debugger;
-            var padre = imagen.parentNode;
-            padre.removeChild(imagen);
-        }
-    }
-
-    function alertaError(){
-        Swal.fire({
-                    title: "Valor fuera de rango",
-                    text: "Por favor ingrese un numero de 1-898",
-                    icon: "error"
-            })
-            clear();
-    }
-
-    function alertaAdvertencia(){
-        Swal.fire({
-                    title: "Debe ingresar algun valor",
-                    text: "Por favor ingrese un numero de 1-898",
-                    icon: "warning"
-            })
-            clear();
-    }
-
-    function alertaInfo(){
-        Swal.fire({
-                    title: "Información",
-                    text: "Actualmente existen 898 Pokémon con la última entrega que fue Pokémon Sword y Pokémon Shield.",
-                    icon: "info"
-            })
-    }
-
-    function alertaNoDecimales(){
-        Swal.fire({
-                    title: "Error!",
-                    text: "Debe ingresar un numero entero",
-                    icon: "error"
-            })
-            clear();
-    }
-
-    function clear(){
-        var C = document.getElementById("pokeID");
-        C.value=null;
-        C = document.getElementById("results");
-        C.innerHTML = "";
-    }
-
-</script>
-
-<!-- ESTILO DEL SITIO-->
-<style>
-    .content{
-        position: absolute;
-        top: 28%;
-        left: 90%;
-        transform: translate(-50%, -50%);
-    }
-</style>
-
 </html>
