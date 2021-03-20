@@ -1,45 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es-MX">
 <head>
-    <title>POKEAPI</title>
+    <title>POKEAPI ¬¬</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="icon" href="ICONO/pika.ico"/>
 </head>
-<body style = "background-color: blue;">
-
-    <!-- <img style="display: block; margin: 0 auto" width="750" height="400" src="https://logos-marcas.com/wp-content/uploads/2020/05/Pokemon-Logo.png">  -->
-    
-    <!-- <div class="hijo">
-        <a href="http://www.facebook.com/AQUI_TU_PAGINA" target="_blank"><img alt="Siguenos en Facebook" src="https://lh6.googleusercontent.com/-CYt37hfDnQ8/T3nNydojf_I/AAAAAAAAAr0/P5OtlZxV4rk/s32/facebook32.png" width=32 height=32  /></a>
-    </div> -->
-    
-    
+<body style = "background-color: #9984d4;">   
     <div class="container" >
         <div >
             <img style="display: block; margin: 0 auto" width="750" height="400" src="https://logos-marcas.com/wp-content/uploads/2020/05/Pokemon-Logo.png">
         </div>
         <div style = "text-align: center;">
-            <strong><h3 style = "color: white;"> BIENVENIDO A LA POKEAPI</h3></strong>
-            <input  style = "text-align: center;" type = "number" id = "pokeID" >
-            <button class="btn btn-info" onclick="alertaInfo()">Info</button>
+            <strong><h3 style = "color: white;"> ¡BUSCA UN POKEMON! </h3></strong>
+            <input  style = "text-align: center;" type = "number" id = "pokeID" style="font-size:larger">
+            <button class="btn btn-info" onclick="alertaInfo()" style="font-size: x-large;">🛈</button>
             <a class="content" href="https://github.com/gaonamario00"><img alt="" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width=32 height=32  /></a>
             <br>
             <br>
-            <button  name = "btn" class = "btn btn-warning" style = "color: white;" onclick = "buscar()" >BUSCAR</button>
+            <button  name = "btn" class = "btn btn-success" style = "color: white; font-size: x-large" onclick = "buscar()" >BUSCAR</button>
             
         </div>
         <br>
-        <div id = "results" style = "text-align: center;">
-            
-            <!-- <div id="spin" class="spinner-border text-success" role="status">
-                <span class="sr-only">Loading...</span>
-              </div> -->
-        </div>
-
+        <div id = "results" style = "text-align: center;">  </div> <!--Aquí se muestran los resultados-->
     </div>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </body>
+ <!--JAVASCRIPT DEL SITIO-->
 <script>
-
     var ID = "";
     var UrlApi = "";
     var data = undefined;
@@ -66,8 +53,6 @@
                     alertaNoDecimales();
                 }else{
                     UrlApi = "https://pokeapi.co/api/v2/pokemon/" + ID.value;
-                    // alert(UrlApi);        
-                    // console.log(UrlApi);
                     obtenerPokemon();
                 }
             }
@@ -75,10 +60,7 @@
     }
     
     function obtenerPokemon(){
-
         clear();
-
-
         var request = new XMLHttpRequest();
         request.open('GET',UrlApi,true);
         request.send();
@@ -95,112 +77,104 @@
     }
 
     function mostrarPokemon(data){
-        
         var element =  document.getElementById("results");
         nombre = document.createElement('h3');
-        nombre.style.color = "yellow";
-        var htmlStyle = "<hr/ ><strong>" +data.id+". "+  data.name + "</strong><br />";
-        nombre.innerHTML = htmlStyle; 
-        element.appendChild(nombre);
+        nombre.style.color = "white";
 
-        img = document.createElement('img');
-        img.src = data.sprites.front_default;
-        img.width = "300";
-        img.height = "300";
-        element.appendChild(img);
+        var htmlStyle = "<hr/ ><strong>" +data.id+". "+  data.name + "</strong><br />";
+            nombre.innerHTML = htmlStyle; 
+            element.appendChild(nombre);
+
+            img = document.createElement('img');
+            img.src = data.sprites.front_default;
+            img.width = "300";
+            img.height = "300";
+            element.appendChild(img);
+
+            //aquí es donde voy a poner el movimiento
+            region = document.createElement('h3');
+            region.style.color = "white";
+            var htmlStyle2 = "Movimiento: " + data.moves[0].move.name + "<br />";
+            region.innerHTML = htmlStyle2; 
+            element.appendChild(region);
 
         htmlStyle = "<hr/ ><strong>";
-
+        htmlStyle+="Tipo: ";
         for(var i = 0; i<data.types.length;i++){
             if(i==1) htmlStyle+= "/";
             types = document.createElement('h4');
             types.style.color = "white";
             htmlStyle += data.types[i].type.name;
-
         }
         htmlStyle += "</strong><br />";
         types.innerHTML = htmlStyle;
-        element.appendChild(types);
-  
-        
+        element.appendChild(types);           
     }
 
     function eliminarElemento(id){
-	imagen = document.getElementById(id);	
-	if (!imagen){
-		alert("El elemento selecionado no existe");
-	} else {
-        debugger;
-		var padre = imagen.parentNode;
-		padre.removeChild(imagen);
-	}
-}
-function alertaError(){
-    Swal.fire({
-                title: "Valor fuera de rango",
-                text: "Por favor ingrese un numero de 1-898",
-                icon: "error"
-           })
-           clear();
-}
-function alertaAdvertencia(){
-    Swal.fire({
-                title: "Debe ingresar algun valor",
-                text: "Por favor ingrese un numero de 1-898",
-                icon: "warning"
-           })
-           clear();
-}
-function alertaInfo(){
-    Swal.fire({
-                title: "Información",
-                text: "Actualmente existen 898 Pokémon con la última entrega que fue Pokémon Sword y Pokémon Shield.",
-                icon: "info"
-           })
-}
-function alertaNoDecimales(){
-    Swal.fire({
-                title: "Error!",
-                text: "Debe ingresar un numero entero",
-                icon: "error"
-           })
-           clear();
-}
-function clear(){
-    var C = document.getElementById("pokeID");
-    C.value=null;
-    C = document.getElementById("results");
-    C.innerHTML = "";
-}
+        imagen = document.getElementById(id);	
+        if (!imagen){
+            alert("El elemento selecionado no existe");
+        } 
+        else {
+            debugger;
+            var padre = imagen.parentNode;
+            padre.removeChild(imagen);
+        }
+    }
+
+    function alertaError(){
+        Swal.fire({
+                    title: "Valor fuera de rango",
+                    text: "Por favor ingrese un numero de 1-898",
+                    icon: "error"
+            })
+            clear();
+    }
+
+    function alertaAdvertencia(){
+        Swal.fire({
+                    title: "Debe ingresar algun valor",
+                    text: "Por favor ingrese un numero de 1-898",
+                    icon: "warning"
+            })
+            clear();
+    }
+
+    function alertaInfo(){
+        Swal.fire({
+                    title: "Información",
+                    text: "Actualmente existen 898 Pokémon con la última entrega que fue Pokémon Sword y Pokémon Shield.",
+                    icon: "info"
+            })
+    }
+
+    function alertaNoDecimales(){
+        Swal.fire({
+                    title: "Error!",
+                    text: "Debe ingresar un numero entero",
+                    icon: "error"
+            })
+            clear();
+    }
+
+    function clear(){
+        var C = document.getElementById("pokeID");
+        C.value=null;
+        C = document.getElementById("results");
+        C.innerHTML = "";
+    }
 
 </script>
 
-
+<!-- ESTILO DEL SITIO-->
 <style>
-    /* .hijo{
-        display: flex;
-        justify-content: center;
-    }
-    .son{
-        position: absolute;
-        top: 20%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        }
-        */
     .content{
         position: absolute;
         top: 28%;
         left: 90%;
         transform: translate(-50%, -50%);
     }
-    /*
-    .content2{
-        position: absolute;
-        top: 95%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    } */
 </style>
 
 </html>
