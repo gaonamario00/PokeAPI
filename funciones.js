@@ -65,17 +65,6 @@ function mostrarPokemon(data) {
     img.height = "300";
     element.appendChild(img);
 
-    //muestra el movimiento del pokemon
-    
-    var htmlStyle2 = "Movimiento: "
-    for (var i = 0; i < data.moves.length; i++){
-        movimiento = document.createElement('h3');
-        movimiento.style.color = "white";
-        htmlStyle2 += data.moves[i].move.name + "<br />";
-    }
-    movimiento.innerHTML = htmlStyle2;
-    element.appendChild(movimiento);
-
     //muestra tipo del pokemon
     htmlStyle = "<hr/ ><strong>";
     htmlStyle += "Tipo: ";
@@ -88,6 +77,20 @@ function mostrarPokemon(data) {
     htmlStyle += "</strong><br />";
     types.innerHTML = htmlStyle;
     element.appendChild(types);
+
+
+    //muestra el movimiento del pokemon
+    
+    var htmlStyle2 = "Movimientos: "
+    for (var i = 0; i < data.moves.length; i++){
+        movimiento = document.createElement('h3');
+        movimiento.style.color = "white";
+        htmlStyle2 += data.moves[i].move.name + "<br />";
+    }
+    movimiento.innerHTML = htmlStyle2;
+    element.appendChild(movimiento);
+
+    
 
     // muestra la region del pokemon
     // region = document.createElement('h4');
