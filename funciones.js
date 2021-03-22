@@ -1,11 +1,11 @@
 var ID = "";
 var UrlApi = "";
 var data = undefined;
-var nombre = undefined;
-var img = undefined;
-var types = undefined;
-var spin = undefined;
-function buscar() {
+
+function buscar(){
+    debugger;
+    var pikachu = document.getElementById("pikachu");
+    pikachu.style.display = "inline";
     ID = document.getElementById("pokeID");
 
     if (ID.value == "" || ID.value == undefined || ID.value == null) {
@@ -48,8 +48,8 @@ function obtenerPokemon() {
 }
 
 function showPoke(data){
+    debugger;
     clear();
-
     var element = document.getElementById('results');
     var element2 = document.getElementById('name');
     var td1 = document.createElement('h2');
@@ -99,20 +99,7 @@ function showPoke(data){
     element.appendChild(txt2);
     element.appendChild(movimiento);
     
-    var tabla = document.getElementById('cabecera');
-    tabla.style.display='inline';
-}
-
-function eliminarElemento(id) {
-    imagen = document.getElementById(id);
-    if (!imagen) {
-        alert("El elemento selecionado no existe");
-    }
-    else {
-        debugger;
-        var padre = imagen.parentNode;
-        padre.removeChild(imagen);
-    }
+    
 }
 
 function alertaError() {
@@ -139,6 +126,7 @@ function alertaInfo() {
         text: "Actualmente existen 898 Pokémon con la última entrega que fue Pokémon Sword y Pokémon Shield.",
         icon: "info"
     })
+
 }
 
 function alertaNoDecimales() {
@@ -157,4 +145,10 @@ function clear() {
     C.innerHTML = "";
     C = document.getElementById("name");
     C.innerHTML = "";
+    pikachu();
+}
+
+function pikachu(){
+    var pikachu = document.getElementById("pikachu");
+    pikachu.style.display = "none";
 }
