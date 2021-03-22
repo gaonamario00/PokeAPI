@@ -1,30 +1,76 @@
 <!DOCTYPE html>
 <html lang="es-MX">
-<head>
-    <title>POKEAPI ¬¬</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="icon" href="ICONO/pika.ico"/>
-    <link rel="stylesheet" href="main.css">
-</head>
-<body style = "background-color: #9984d4;">
-    <div class="container" >
-        <div >
-            <img style="display: block; margin: 0 auto" width="750" height="400" src="https://logos-marcas.com/wp-content/uploads/2020/05/Pokemon-Logo.png">
-        </div>
-        <div style = "text-align: center;">
-            <strong><h3 style = "color: white;"> ¡BUSCA UN POKEMON! </h3></strong>
-            <input  style = "text-align: center;" type = "number" id = "pokeID" style="font-size:larger">
-            <button class="btn btn-info" onclick="alertaInfo()" style="font-size: x-large;">🛈</button>
-            <a class="content" href="https://github.com/gaonamario00"><img alt="" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width=32 height=32  /></a>
-            <br>
-            <br>
-            <button  name = "btn" class = "btn btn-success" style = "color: white; font-size: x-large" onclick = "buscar()" >BUSCAR</button>
-            
-        </div>
-        <br>
-        <div id = "results" style = "text-align: center;">  </div> <!--Aquí se muestran los resultados-->
+  <head>
+    <title>P O K E A P I</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="icon" href="ICONO/arceus.ico" />
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body style="background-color: #9984d4">
+    <script src="funciones.js" defer></script>
+    <div class="container">
+      <div>
+        <img
+          style="display: block; margin: 0 auto"
+          width="750"
+          height="400"
+          src="https://25.media.tumblr.com/8e4aafd22dfc23592ea2bf16f4f7be87/tumblr_mze2tugzvO1qh44dro1_500.gif"
+        />
+      </div>
+      <div style="text-align: center">
+        <strong><h3 style="color: white">¡BUSCA UN POKEMON!</h3></strong>
+        <input
+          style="text-align: center"
+          type="number"
+          id="pokeID"
+          style="font-size: larger"
+        />
+        <button
+          class="btn btn-info"
+          onclick="alertaInfo()"
+          style="font-size: x-large"
+        >
+          🛈
+        </button>
+        <a class="content" href="https://github.com/gaonamario00/PokeAPI"
+          ><img
+            alt=""
+            src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+            width="32"
+            height="32"
+        /></a>
+        <br />
+        <br />
+        <button
+          name="btn"
+          class="btn btn-success"
+          style="color: white; font-size: x-large"
+          onclick="buscar()"
+        >
+          BUSCAR
+        </button>
+      </div>
+      <br />
+
+      <div
+        id="name"
+        class="container"
+        style="text-align: center; display: flex; justify-content: center"
+      ></div>
+      <table
+        class="tabla"
+        style="text-align: center; display: flex; justify-content: center"
+      >
+
+
+        <tr id="results"></tr>
+      </table>
+      <!--Aquí se muestran los resultados-->
     </div>
-    <script src="funciones.js"></script>
+
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-</body>
+  </body>
 </html>

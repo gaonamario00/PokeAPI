@@ -41,70 +41,66 @@ function obtenerPokemon() {
         if (this.readyState == 4 && this.status == 200) {
             var resultsData = this.response;
             data = JSON.parse(resultsData);
-            mostrarPokemon(data);
+            showPoke(data);
         }
     }
 
 }
 
-function mostrarPokemon(data) {
+function showPoke(data){
+    clear();
 
-    //muestra el numero y el nombre del pokemon
-    var element = document.getElementById("results");
-    nombre = document.createElement('h3');
-    nombre.style.color = "white";
-    var htmlStyle = "<hr/ ><strong>" + data.id + ". " + data.name + "</strong><br />";
-    nombre.innerHTML = htmlStyle;
-    element.appendChild(nombre);
-
-    //inserta imagen del pokemon
-    img = document.createElement('img');
+    var element = document.getElementById('results');
+    var element2 = document.getElementById('name');
+    var td1 = document.createElement('h2');
+    var nombreStyle = "<strong>" + data.id + ". " + data.name + "</strong>";
+    
+    td1.style.color="yellow";
+    var img = document.createElement('img');
     img.src = data.sprites.front_default;
-    //img.src = data.sprites.other.dream_world.front_default;
     img.width = "300";
     img.height = "300";
+
+    td1.innerHTML=nombreStyle;
+    txt=document.createElement('h2');
+    txt.innerHTML="Sprites";
+
+    element.appendChild(txt);
     element.appendChild(img);
+    element2.appendChild(td1);
 
-    //muestra tipo del pokemon
-    htmlStyle = "<hr/ ><strong>";
-    htmlStyle += "Tipo: ";
-    for (var i = 0; i < data.types.length; i++) {
-        if (i == 1) htmlStyle += "/";
-        types = document.createElement('h2');
-        types.style.color = "white";
-        htmlStyle += data.types[i].type.name;
+    var td2 = document.createElement('tr');
+    var typeStyle="";
+    for(var i = 0; i<data.types.length;i++){
+        if(i==1) typeStyle+= "/";
+        types = document.createElement('h4');
+        types.style.color = "yellow";
+        typeStyle += data.types[i].type.name;
     }
-    htmlStyle += "</strong><br />";
-    types.innerHTML = htmlStyle;
-    element.appendChild(types);
+    typeStyle+= "<br>";
+    types.innerHTML = typeStyle;
+    td2.appendChild(types);
+    td2.style.width="20%";
+    txt.innerHTML="Tipo";
+    txt.style.color="yellow";
+    element.appendChild(txt);
+    element.appendChild(td2);
 
-
-    //muestra el movimiento del pokemon
-    
-    var htmlStyle2 = "Movimientos: "
-    for (var i = 0; i < data.moves.length; i++){
-        movimiento = document.createElement('h3');
-        movimiento.style.color = "white";
-        htmlStyle2 += data.moves[i].move.name + "<br />";
+    var movStyle = "";
+    for (var i = 0; i < 4; i++){
+        movimiento = document.createElement('tr');
+        movimiento.style.color = "yellow";
+        movStyle += data.moves[i].move.name + "<br/>";
     }
-    movimiento.innerHTML = htmlStyle2;
+    movimiento.innerHTML = movStyle;
+    var txt2=document.createElement('h2');
+    txt2.innerHTML="Movimiento";
+    txt2.style.color="yellow";
+    element.appendChild(txt2);
     element.appendChild(movimiento);
-
     
-
-    // muestra la region del pokemon
-    // region = document.createElement('h4');
-    // region.style.color = "white";
-    // var htmlStyle3 = "Region: ";
-    // for (var i = 0; i < data.generations.length; i++) {
-    //     if (i == 1) htmlStyle += "/";
-    //     types = document.createElement('h4');
-    //     types.style.color = "white";
-    //     htmlStyle += generations[i].generation.name;
-    // }
-    // htmlStyle3 += "</strong><br />";
-    // region.innerHTML = htmlStyle3;
-    // element.appendChild(region);    
+    var tabla = document.getElementById('cabecera');
+    tabla.style.display='inline';
 }
 
 function eliminarElemento(id) {
@@ -158,5 +154,7 @@ function clear() {
     var C = document.getElementById("pokeID");
     C.value = null;
     C = document.getElementById("results");
+    C.innerHTML = "";
+    C = document.getElementById("name");
     C.innerHTML = "";
 }
